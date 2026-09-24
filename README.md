@@ -82,6 +82,50 @@ The payment page is separated from the main dashboard flow, allowing customers t
 
 ---
 
+## Screenshots
+
+### 🔐 Login
+
+![Login](./docs/login.png)
+
+### 📊 Dashboard
+
+![Dashboard](./docs/dashboard1.png)
+
+![Dashboard](./docs/dashboard2.png)
+
+![Dashboard](./docs/dashboard3.png)
+
+### 👛 Wallet Management
+
+![Wallet Management](./docs/wallets.png)
+
+### 💸 Send Payment
+
+![Send Payment](./docs/send-payment.png)
+
+### 🧾 Payment Request
+
+![Payment Request](./docs/payment-request.png)
+
+### 📄 Invoices
+
+![Invoices](./docs/invoices.png)
+
+### 🌐 Networks
+
+![Networks](./docs/networks.png)
+
+### 🪙 Tokens
+
+![Tokens](./docs/tokens.png)
+
+### 📜 Transaction History
+
+![Transaction History](./docs/history.png)
+
+---
+
 ## Tech Stack
 
 ### Frontend
@@ -101,7 +145,7 @@ The payment page is separated from the main dashboard flow, allowing customers t
 
 ### Database
 
-* PostgreSQL / Prisma-compatible database
+* PostgreSQL-compatible database
 * Prisma Migrations
 
 ### Blockchain
@@ -117,9 +161,9 @@ The payment page is separated from the main dashboard flow, allowing customers t
 
 ```text
 ┌───────────────────────────────────────┐
-│              O-Pay Frontend           │
+│             O-Pay Frontend            │
 │                                       │
-│  React + TypeScript + Vite            │
+│      React + TypeScript + Vite        │
 │                                       │
 │  ┌───────────┐   ┌─────────────────┐  │
 │  │ Dashboard │   │ Wallet Manager  │  │
@@ -138,8 +182,8 @@ The payment page is separated from the main dashboard flow, allowing customers t
                     │ ethers.js
                     ▼
           ┌─────────────────────┐
-          │   Web3 Wallet       │
-          │   Provider          │
+          │    Web3 Wallet      │
+          │    Provider         │
           └──────────┬──────────┘
                      │
                      ▼
@@ -147,15 +191,14 @@ The payment page is separated from the main dashboard flow, allowing customers t
           │ Ethereum-Compatible  │
           │ Blockchain Network   │
           └─────────────────────┘
-
-                    │
-                    │ REST API
-                    ▼
+                     │
+                     │ REST API
+                     ▼
           ┌─────────────────────┐
-          │ O-Pay Backend       │
+          │   O-Pay Backend     │
           │                     │
-          │ Node + Express      │
-          │ Prisma              │
+          │   Node + Express    │
+          │   Prisma            │
           └──────────┬──────────┘
                      │
                      ▼
@@ -192,6 +235,19 @@ O-Pay/
 │   ├── package.json
 │   ├── prisma.config.ts
 │   └── tsconfig.json
+│
+├── docs/
+│   ├── dashboard1.png
+│   ├── dashboard2.png
+│   ├── dashboard3.png
+│   ├── history.png
+│   ├── invoices.png
+│   ├── login.png
+│   ├── networks.png
+│   ├── payment-request.png
+│   ├── send-payment.png
+│   ├── tokens.png
+│   └── wallets.png
 │
 ├── src/
 │   ├── components/
@@ -294,7 +350,7 @@ DATABASE_URL=
 SEPOLIA_RPC_URL=
 ```
 
-Do **not** commit your real `.env` file.
+**Do not commit your real `.env` file.**
 
 Private keys, seed phrases, RPC credentials, database credentials, and other secrets should never be stored directly in the source code.
 
@@ -315,7 +371,7 @@ The backend will start using the configuration defined in the backend project.
 
 ## Run the Frontend
 
-Open another terminal:
+Open another terminal from the project root:
 
 ```bash
 npm run dev
@@ -331,29 +387,65 @@ The basic wallet interaction works through the browser wallet provider:
 
 ```text
 User
-  │
-  ▼
+ │
+ ▼
 Connect Wallet
-  │
-  ▼
+ │
+ ▼
 Browser Wallet
-  │
-  ▼
+ │
+ ▼
 Wallet Address + Network
-  │
-  ▼
+ │
+ ▼
 O-Pay Dashboard
-  │
-  ├── Send Payment
-  ├── View Balance
-  ├── View Transactions
-  ├── Manage Wallets
-  └── Manage Payments
+ │
+ ├── Send Payment
+ ├── View Balance
+ ├── View Transactions
+ ├── Manage Wallets
+ └── Manage Payments
 ```
 
 For transactions, the user confirms the transaction through their wallet provider.
 
 O-Pay does not require the application to receive or store the user's private key.
+
+---
+
+## Payment Flow
+
+A typical payment flow works as follows:
+
+```text
+Merchant
+   │
+   ▼
+Create Payment Request
+   │
+   ▼
+Generate Invoice
+   │
+   ▼
+Payment Link
+   │
+   ▼
+Customer Opens Payment Page
+   │
+   ▼
+Connect Web3 Wallet
+   │
+   ▼
+Review Transaction
+   │
+   ▼
+Confirm Transaction
+   │
+   ▼
+Blockchain Network
+```
+
+This workflow demonstrates how a Web3 payment interface can connect merchant-side payment information with a customer-facing blockchain payment experience.
 
 ---
 
@@ -419,7 +511,7 @@ Potential improvements for future versions include:
 
 O-Pay is a portfolio and educational project.
 
-Blockchain transactions are irreversible in many cases. Users should always verify wallet addresses, network selection, transaction amounts, and transaction details before signing.
+Blockchain transactions can be irreversible. Users should always verify wallet addresses, network selection, transaction amounts, and transaction details before signing a transaction.
 
 ---
 
