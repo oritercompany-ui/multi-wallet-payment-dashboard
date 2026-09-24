@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum InvoiceAsset {
+  ETH
+  ERC20
+}
+
+enum InvoiceStatus {
+  pending
+  paid
+  cancelled
+}
+
+model Invoice {
+  id              String        @id @default(uuid())
+  invoiceNumber   String        @unique
+
+  title           String
+  description     String?
+
+  amount          String
+  asset           InvoiceAsset
+
+  tokenAddress    String?
+
+  recipient       String
+  chainId         String
+
+  status          InvoiceStatus @default(pending)
+
+  createdAt       DateTime      @default(now())
+  paidAt          DateTime?
+
+  transactionHash String?
+  payer           String?
+
+  createdBy       String
+
+  updatedAt       DateTime      @updatedAt
+}
